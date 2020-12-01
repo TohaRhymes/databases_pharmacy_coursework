@@ -95,21 +95,29 @@ pharmacies_name_values = ['Stolichki', 'Nevis', "P and G", "S and F", "W#M", "Oz
 trade_name_start_values = ["Mik", 'LEU', "Com", "Ros", "Hetero", "Anti"]
 trade_name_end_values = ["ous", 'preus', "vit", 'uci', 'stormo']
 
+# settings - amount of rows
 pathogen_reps = 120
 disease_reps = 130
 poison_reps = 70
 ethno_reps = 400
 drugs_reps = 340
-d_t_p = min(500, drugs_reps * poison_reps)
-d_t_d = min(230, drugs_reps * disease_reps)
-e_t_d = min(230, ethno_reps * disease_reps)
+d_t_p = 500
+d_t_d = 230
+e_t_d = 230
 company_reps = 100
 c_info_reps = 25
-dev_reps = min(200, company_reps * pathogen_reps)
+dev_reps = 200
 patent_reps = 50
 pharm_reps = 230
-tradem_reps = min(200, drugs_reps * patent_reps * company_reps)
-stock_rep = min(500, pharm_reps * tradem_reps)
+tradem_reps = 200
+stock_rep = 500
+# check M-M connections, to be sure:
+d_t_p = min(d_t_p, max(int(drugs_reps * poison_reps / 4), 1))
+d_t_d = min(d_t_d, max(int(drugs_reps * disease_reps / 4), 1))
+e_t_d = min(e_t_d, max(int(ethno_reps * disease_reps / 4), 1))
+dev_reps = min(dev_reps, max(int(company_reps * pathogen_reps / 4), 1))
+tradem_reps = min(tradem_reps, max(int(drugs_reps * patent_reps * company_reps / 8), 1))
+stock_rep = min(stock_rep, max(int(pharm_reps * tradem_reps / 4), 1))
 
 # PATHOGENS
 pathogen_name_endings = ArrayRandomGetter(pathogen_name_endings_values)
