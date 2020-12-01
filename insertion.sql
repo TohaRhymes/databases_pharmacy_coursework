@@ -31,7 +31,8 @@ INSERT INTO companies(name, specialization) VALUES('RosVitro', 'viruses');
 UPDATE companies SET (market_cap, net_profit_margin_pct_annual) = (10, 100) where name='RosVitro';
 UPDATE companies SET (name, specialization, market_cap, net_profit_margin_pct_annual)=('RosVitro', 'viruses', 50, 34);
 INSERT INTO companies(name, specialization, market_cap, net_profit_margin_pct_annual) VALUES('Grindex', 'synthetic', 1000, 2130);
-
+INSERT INTO companies(name, specialization) VALUES('RosVitro00', 'viruses');
+INSERT INTO companies(name, specialization) VALUES('RosVitro001', 'viruses');
 
 INSERT INTO patents(distribution, start_date) VALUES('free-to-use', '2010-10-10');
 INSERT INTO patents(distribution) VALUES('restricted-to-use');
