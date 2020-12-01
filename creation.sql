@@ -288,3 +288,30 @@ CREATE TRIGGER stock_msg_last_T
     ON stock
     FOR EACH ROW
 EXECUTE PROCEDURE stock_msg_last();
+
+
+
+
+create index development_company_id on development using hash(company_id);
+create index development_pathogen_id on development using hash(pathogen_id);
+create index disease_pathogen_id on diseases using hash(pathogen_id);
+create index company_info_company_id on company_info using hash(company_id);
+create index trademarks_drug_id on trademarks using hash(drug_id);
+create index trademarks_company_id on trademarks using hash(company_id);
+create index trademarks_patent_id on trademarks using hash(patent_id);
+create index stock_pharmacy_id on stock using hash(pharmacy_id);
+create index stock_trademark_id on stock using hash(trademark_id);
+
+create index trademark_price on trademarks using btree(release_price);
+
+create index company_name on companies using hash(name);
+create index trademark_name on trademarks using hash(name);
+create index drug_substance on drugs using hash(active_substance);
+create index disease_name on diseases using hash(name);
+create index poison_substance on poisons using hash(active_substance);
+create index ethnoscience_name on ethnoscience using hash(name);
+create index pharmacy_name on pharmacies using hash(name);
+
+create index poison_mortality on poisons using btree(mortality);
+create index diseases_mortality on diseases using btree(mortality);
+
