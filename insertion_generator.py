@@ -96,21 +96,21 @@ trade_name_start_values = ["Mik", 'LEU', "Com", "Ros", "Hetero", "Anti"]
 trade_name_end_values = ["ous", 'preus', "vit", 'uci', 'stormo']
 
 # settings - amount of rows
-pathogen_reps = 120
-disease_reps = 130
-poison_reps = 70
-ethno_reps = 400
-drugs_reps = 340
-d_t_p = 500
-d_t_d = 230
-e_t_d = 230
-company_reps = 100
-c_info_reps = 25
-dev_reps = 200
-patent_reps = 50
-pharm_reps = 230
-tradem_reps = 200
-stock_rep = 500
+pathogen_reps = 13000
+disease_reps = 100000
+poison_reps = 100
+ethno_reps = 1500
+drugs_reps = 3500
+d_t_p = 4000
+d_t_d = 4000
+e_t_d = 3000
+company_reps = 563
+c_info_reps = 250
+dev_reps = 2700
+patent_reps = 1500
+pharm_reps = 7000
+tradem_reps = 3000
+stock_rep = 5000
 # check M-M connections, to be sure:
 d_t_p = min(d_t_p, max(int(drugs_reps * poison_reps / 4), 1))
 d_t_d = min(d_t_d, max(int(drugs_reps * disease_reps / 4), 1))
@@ -185,7 +185,7 @@ etd_set = make_many_to_many(e_t_d, ethno_reps, disease_reps)
 for et, di in etd_set:
     script += f"INSERT INTO ethnoscience_to_diseases VALUES ({et}, {di});\n"
 
-# COMPANIES & COMPANY_INFO (history)
+# # COMPANIES & COMPANY_INFO (history)
 company_names = ArrayRandomGetter(company_names_values)
 company_specialization = ArrayRandomGetter(company_specialization_values)
 for _ in range(company_reps):

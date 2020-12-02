@@ -14,8 +14,8 @@ END;
 $$ LANGUAGE plpgsql VOLATILE;
 
 -- USAGE EXAMPLE;
-SELECT *
-FROM random_changing();
+-- SELECT *
+-- FROM random_changing();
 
 --AND now function for changing
 DROP FUNCTION IF EXISTS change_economical(_company_id int);
@@ -61,8 +61,8 @@ END;
 $$ LANGUAGE plpgsql VOLATILE;
 
 -- USAGE
-SELECT *
-FROM change_economical(4);
+-- SELECT *
+-- FROM change_economical(4);
 
 -----------------------------------------------------------
 
@@ -107,8 +107,8 @@ $$ LANGUAGE plpgsql VOLATILE;
 
 -- USAGE:
 -- В случае, если айди не существует, валится ошибка!))))
-SELECT add_to_stock(2, 100, -1118);
-SELECT add_to_stock(2, 1, 118);
+-- SELECT add_to_stock(2, 100, -1118);
+-- SELECT add_to_stock(2, 1, 118);
 
 -----------------------------------------------------------
 
@@ -142,11 +142,11 @@ END;
 $$ LANGUAGE plpgsql VOLATILE;
 
 -- USAGE EXAMPLES
-SELECT * FROM add_trademark(2,
-    3,
-    'Anamorgggen',
-    0.5,
-    500.6,
-    'usage with some constraints');
+-- SELECT * FROM add_trademark(2,
+--     3,
+--     'Anamorgggen',
+--     0.5,
+--     500.6,
+--     'usage with some constraints');
 
 

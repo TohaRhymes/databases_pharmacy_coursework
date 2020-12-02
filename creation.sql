@@ -150,8 +150,7 @@ CREATE TABLE trademarks
                                      NOT NULL,
     patent_id     INTEGER
         CONSTRAINT fk_patents_patent_id
-            REFERENCES patents (id) ON DELETE CASCADE
-        UNIQUE,
+            REFERENCES patents (id) ON DELETE CASCADE,
     UNIQUE (drug_id, company_id, patent_id)
 );
 
