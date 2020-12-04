@@ -118,7 +118,7 @@ $$ LANGUAGE plpgsql VOLATILE;
 -- creates a patent for it and the trademark itself.
 -- CREATE TYPE patent_distribution AS ENUM ('free-to-use', 'usage with some constraints', 'restricted-to-use');
 
-DROP FUNCTION IF EXISTS add_trademark(_company_id int, _drug_id int, _name VARCHAR(80), _doze VARCHAR(80), _release_price VARCHAR(80), _distribution  VARCHAR(80));
+DROP FUNCTION IF EXISTS add_trademark(_company_id int, _drug_id int, _name VARCHAR(80), _doze VARCHAR(80), _release_price VARCHAR(80), _distribution VARCHAR(80));
 
 CREATE OR REPLACE FUNCTION add_trademark(_company_id int,
                                          _drug_id int,
