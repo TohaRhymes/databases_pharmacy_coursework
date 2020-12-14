@@ -56,12 +56,27 @@ create index p_mort on poisons using btree (mortality DESC);
 
 ------------------
 
+
+
+drop index if exists disease_name;
+
+-- DISCARD ALL;
+--
 -- EXPLAIN ANALYZE
 -- SELECT *
 -- FROM diseases
 -- WHERE name = 'Newton''s kishg';
 
+
 create index disease_name on diseases using hash (name);
+
+
+-- EXPLAIN ANALYZE
+-- SELECT *
+-- FROM diseases
+-- WHERE name = 'Newton''s kishg';
+
+-- create index disease_name on diseases using hash (name);
 ---
 create index company_name on companies using hash (name);
 create index trademark_name on trademarks using hash (name);
@@ -71,3 +86,6 @@ create index ethnoscience_name on ethnoscience using hash (name);
 create index pharmacy_name on pharmacies using hash (name);
 
 ------------------
+
+
+

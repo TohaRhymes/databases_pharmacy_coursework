@@ -82,3 +82,5 @@ CREATE TRIGGER stock_msg_last_T
     ON stock
     FOR EACH ROW
 EXECUTE PROCEDURE stock_msg_last();
+
+

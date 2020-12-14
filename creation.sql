@@ -177,6 +177,7 @@ CREATE TABLE stock
 
 CREATE TABLE drugs_to_diseases
 (
+    id          SERIAL PRIMARY KEY,
     drugs_id   INTEGER
         CONSTRAINT fk_drugs_id REFERENCES drugs (id) ON DELETE CASCADE
         NOT NULL,
@@ -187,6 +188,7 @@ CREATE TABLE drugs_to_diseases
 );
 CREATE TABLE drugs_to_poisons
 (
+    id          SERIAL PRIMARY KEY,
     drugs_id  INTEGER
         CONSTRAINT fk_drugs_id REFERENCES drugs (id) ON DELETE CASCADE
         NOT NULL,
@@ -197,6 +199,7 @@ CREATE TABLE drugs_to_poisons
 );
 CREATE TABLE ethnoscience_to_diseases
 (
+    id          SERIAL PRIMARY KEY,
     ethnoscience_id INTEGER
         CONSTRAINT fk_ethnoscience_id REFERENCES ethnoscience (id) ON DELETE CASCADE
         NOT NULL,
@@ -205,3 +208,6 @@ CREATE TABLE ethnoscience_to_diseases
         NOT NULL,
     UNIQUE (ethnoscience_id, disease_id)
 );
+
+
+
