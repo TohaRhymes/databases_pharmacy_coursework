@@ -1,10 +1,11 @@
 package se.ifmo.pepe.cwdb.backend.customtype;
 
 public enum PathogenType {
-    VIRUS,
-    BACTERIUM,
-    PRION,
-    VIROID,
-    FUNGUS,
-    SMALL_ANIMAL
+    virus,
+    bacterium,
+    protozoan,
+    prion,
+    viroid,
+    fungus,
+    small_animal
 }

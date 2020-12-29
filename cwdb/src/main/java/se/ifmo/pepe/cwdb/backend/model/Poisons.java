@@ -13,7 +13,7 @@ import java.util.Set;
 public class Poisons implements Serializable {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "active_substance")
@@ -29,7 +29,7 @@ public class Poisons implements Serializable {
     @Column(name = "mortality")
     private Double mortality;
 
-    @OneToMany(mappedBy = "drugs")
+    @OneToMany(mappedBy = "drugs", fetch = FetchType.EAGER)
     Set<DrugsToPoisons> drugsToPoisons;
 
 }

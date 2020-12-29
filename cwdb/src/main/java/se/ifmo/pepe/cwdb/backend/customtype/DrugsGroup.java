@@ -1,9 +1,9 @@
 package se.ifmo.pepe.cwdb.backend.customtype;
 
 public enum DrugsGroup {
-    GROUP_A("Group A (prohibited substances)"),
-    GROUP_B("Group B (limited turnover)"),
-    GROUP_C("Group C (free circulation)");
+    group_a_prohibited_substances("Group A (prohibited substances)"),
+    group_b_limited_turnover("Group B (limited turnover)"),
+    group_c_free_circulation("Group C (free circulation)");
     private final String code;
 
     DrugsGroup(String s) {

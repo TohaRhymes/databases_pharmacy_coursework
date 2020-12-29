@@ -11,12 +11,7 @@ import java.io.Serializable;
 public class Trademarks implements Serializable {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "entity_id_seq")
-    @SequenceGenerator(
-            name = "entity_id_seq",
-            sequenceName = "hibernate_sequence",
-            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name", nullable = false)

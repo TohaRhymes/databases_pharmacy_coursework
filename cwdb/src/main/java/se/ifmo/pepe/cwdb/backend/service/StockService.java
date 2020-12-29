@@ -66,7 +66,7 @@ public class StockService {
     }
 
     public Drugs findOneDrugById(Long id) {
-        return drugRepository.findById(id).orElseThrow();
+        return drugRepository.findById(id).get();
     }
 
     public void purchase(StockDTO stockDTO) throws StockServicePurchasingException {
@@ -84,13 +84,17 @@ public class StockService {
         });
         if (trademarks.contains(trademarkRepository.findById(s.getTrademarkId()).get().getName()))
             throw new StockServicePurchasingException("Already exists");
-        else
-            stockRepository.save(s);
+        else {
+            /*
+             * Замена на процедуру
+             * */
+            stockRepository.addToStock(s.getPharmacyId().intValue(), s.getTrademarkId().intValue(), s.getAvailability().intValue());
+
+//            stockRepository.save(s);
+        }
     }
 
     public void sell(StockDTO stockDTO, Long amount) {
-
-        System.out.println(stockDTO);
         List<Stock> currentStock = stockRepository.findAllByPharmacyId(stockDTO.getPharmacyId());
         currentStock.forEach(st -> {
             if (trademarkRepository.findById(st.getTrademarkId()).get().getName().equals(stockDTO.getTrademarkName())) {
@@ -98,7 +102,16 @@ public class StockService {
                 stockRepository.save(st);
             }
         });
+    }
 
+    public void buy(StockDTO stockDTO, Long amount) {
+        List<Stock> currentStock = stockRepository.findAllByPharmacyId(stockDTO.getPharmacyId());
+        currentStock.forEach(st -> {
+            if (trademarkRepository.findById(st.getTrademarkId()).get().getName().equals(stockDTO.getTrademarkName())) {
+                st.setAvailability(st.getAvailability() + amount);
+                stockRepository.save(st);
+            }
+        });
     }
 
     public String validate(String tmName) {

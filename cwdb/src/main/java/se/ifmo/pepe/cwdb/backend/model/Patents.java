@@ -13,7 +13,7 @@ import java.sql.Date;
 public class Patents implements Serializable {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "distribution")
@@ -22,4 +22,32 @@ public class Patents implements Serializable {
 
     @Column(name = "start_date")
     private Date startDate;
+
+    public String resolveDistribution() {
+        switch (this.distribution) {
+            case free_to_use: {
+                return "Free to use";
+            }
+            case usage_with_constraints: {
+                return "Usage with constraints";
+            }
+            default: {
+                return "Restricted to use";
+            }
+        }
+    }
+
+    public static PatentDistribution resolveDistribution(String query) {
+        switch (query) {
+            case "free_to_use": {
+                return PatentDistribution.free_to_use;
+            }
+            case "usage_with_constraints": {
+                return PatentDistribution.usage_with_constraints;
+            }
+            default: {
+                return PatentDistribution.restricted_to_use;
+            }
+        }
+    }
 }

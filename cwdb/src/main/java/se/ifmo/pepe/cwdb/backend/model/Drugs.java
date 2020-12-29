@@ -5,6 +5,7 @@ import se.ifmo.pepe.cwdb.backend.customtype.DrugsGroup;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 
 @Data
@@ -13,7 +14,7 @@ import java.util.Set;
 public class Drugs implements Serializable {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "active_substance")
@@ -23,11 +24,14 @@ public class Drugs implements Serializable {
     private Boolean homeopathy;
 
     @Column(name = "drugs_group")
-    private String drugsGroup;
+    @Enumerated(EnumType.STRING)
+    private DrugsGroup drugsGroup;
 
-    @OneToMany(mappedBy = "poisons")
+    @OneToMany(mappedBy = "poisons", fetch = FetchType.LAZY)
     Set<DrugsToPoisons> drugsToPoisons;
 
-    @OneToMany(mappedBy = "diseases")
+    @OneToMany(mappedBy = "diseases", fetch = FetchType.LAZY)
     Set<DrugsToDiseases> drugsToDiseases;
- }
+
+
+}

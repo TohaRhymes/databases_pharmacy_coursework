@@ -1,7 +1,6 @@
 package se.ifmo.pepe.cwdb.ui.view.trademarks;
 
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
@@ -11,6 +10,8 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinSession;
+import se.ifmo.pepe.cwdb.backend.auth.User;
 import se.ifmo.pepe.cwdb.backend.model.Trademarks;
 import se.ifmo.pepe.cwdb.backend.service.TrademarkService;
 import se.ifmo.pepe.cwdb.ui.MainLayout;
@@ -22,6 +23,7 @@ public class TrademarkView extends VerticalLayout {
     private final TextField filterText = new TextField();
     private final TrademarkForm trademarkForm;
     private final TrademarkService trademarkService;
+    private final User currentUser = VaadinSession.getCurrent().getAttribute(User.class);
 
     public TrademarkView(TrademarkService trademarkService) {
         this.trademarkService = trademarkService;
@@ -30,7 +32,7 @@ public class TrademarkView extends VerticalLayout {
 
         configureGrid();
 
-        trademarkForm = new TrademarkForm(trademarkService.findAll());
+        trademarkForm = new TrademarkForm(trademarkService.findAll(), trademarkService);
         trademarkForm.addListener(TrademarkForm.SaveEvent.class, this::saveTm);
         trademarkForm.addListener(TrademarkForm.DeleteEvent.class, this::deleteTm);
         trademarkForm.addListener(TrademarkForm.CloseEvent.class, e -> closeEditor());
@@ -47,7 +49,13 @@ public class TrademarkView extends VerticalLayout {
 
     private void saveTm(TrademarkForm.SaveEvent event) {
         try {
-            trademarkService.save(event.getTrademark());
+            Trademarks t = event.getTrademark();
+            t.setCompanyId(currentUser.getCompanyID());
+
+            if (t.getId() == null) t.setId(trademarkService.count() + 1);
+            if (t.getDrugId() == null) t.setDrugId(trademarkService.findDrugByActiveSubstance(event.getSource().autocomplete.getValue()).getId());
+            if (t.getPatentId() == null) t.setPatentId(trademarkService.countPatents() + 1);
+            trademarkService.save(t, event.getSource().autocomplete.getValue(), event.getSource().select.getValue());
             updateGrid();
             closeEditor();
             Notification.show("Data was saved", 5000, Notification.Position.TOP_END);

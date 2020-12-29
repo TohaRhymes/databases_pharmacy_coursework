@@ -7,6 +7,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import se.ifmo.pepe.cwdb.backend.auth.Role;
 import se.ifmo.pepe.cwdb.backend.auth.User;
 import se.ifmo.pepe.cwdb.backend.auth.UserPrincipal;
@@ -27,7 +28,41 @@ import java.util.List;
 
 @Service
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
-    public record AuthorizedRoute(String route, String name, Class<? extends Component> view) {}
+    public class AuthorizedRoute {
+        private String route;
+        private String name;
+        private Class<? extends Component> view;
+
+        public AuthorizedRoute(String route, String name, Class<? extends Component> view) {
+            this.route = route;
+            this.name = name;
+            this.view = view;
+        }
+
+        public String getRoute() {
+            return route;
+        }
+
+        public void setRoute(String route) {
+            this.route = route;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public Class<? extends Component> getView() {
+            return view;
+        }
+
+        public void setView(Class<? extends Component> view) {
+            this.view = view;
+        }
+    }
 
     private final UserRepo userRepository;
     private final PharmacyRepo pharmacyRepository;
@@ -38,7 +73,7 @@ public class UserDetailsService implements org.springframework.security.core.use
         this.pharmacyRepository = pharmacyRepository;
         this.companyRepository = companyRepository;
     }
-
+    @Transactional
     public Authentication authenticate(String username, String password) throws AuthException {
         User user = userRepository.findByUsername(username);
         if (user != null && password.equals(user.getPassword())) {
@@ -57,7 +92,7 @@ public class UserDetailsService implements org.springframework.security.core.use
     }
 
     public List<AuthorizedRoute> getAuthorizedRoutes(Role role) {
-        var routes = new ArrayList<AuthorizedRoute>();
+        List<AuthorizedRoute> routes = new ArrayList<AuthorizedRoute>();
         if (role.equals(Role.COMPANY)) {
             routes.add(new AuthorizedRoute("trademarks", "Trademarks", TrademarkView.class));
             routes.add(new AuthorizedRoute("company-info", "Company Info", CompanyInfoView.class));

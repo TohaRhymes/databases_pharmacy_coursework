@@ -38,10 +38,14 @@ public class User implements Serializable {
 
     public void setRole(String label) {
         switch (label) {
-            case "Pharmacy" ->
-                    this.role = Role.PHARMACY;
-            case "Company" ->
-                    this.role = Role.COMPANY;
+            case "Pharmacy": {
+                this.role = Role.PHARMACY;
+                break;
+            }
+            case "Company": {
+                this.role = Role.COMPANY;
+                break;
+            }
         }
     }
 }

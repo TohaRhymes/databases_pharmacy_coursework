@@ -6,7 +6,6 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import java.util.stream.Stream;
 
-@Converter(autoApply = true)
 public class DrugsGroupEnumConverter implements AttributeConverter<DrugsGroup, String> {
 
     @Override

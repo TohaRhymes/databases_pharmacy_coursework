@@ -1,10 +1,10 @@
 package se.ifmo.pepe.cwdb.backend.customtype;
 
 public enum DevelopmentStage {
-    PRECLINICAL_PHASE,
-    PHASE_0,
-    PHASE_1,
-    PHASE_2,
-    PHASE_3,
-    PHASE_4
+    preclinical_phase,
+    phase_0,
+    phase_1,
+    phase_2,
+    phase_3,
+    phase_4
 }

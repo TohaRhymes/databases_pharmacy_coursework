@@ -66,7 +66,8 @@ public class StockView extends VerticalLayout {
     }
 
     private Button createRemoveButton(Grid<StockDTO> grid, StockDTO item) {
-        return new Button("Sell", e -> {
+
+        return new Button("Edit", e -> {
             Dialog dialog = new Dialog();
             dialog.setDraggable(true);
             dialog.setWidth("20%");
@@ -87,29 +88,54 @@ public class StockView extends VerticalLayout {
                 }
             });
 
-            Button sell = new Button("Sell", ev -> {
-                if (item.getAvailability() > amountToSell.getValue().longValue()) {
+            Button sell = new Button("Edit");
+            if (item.getAvailability() != 0) {
+                sell.setText("Sell");
+                sell.addClickListener(ev -> {
+                    if (item.getAvailability() >= amountToSell.getValue().longValue() && item.getAvailability() != 0) {
+                        ListDataProvider<StockDTO> dataProvider = (ListDataProvider<StockDTO>) grid
+                                .getDataProvider();
+                        dataProvider.getItems().forEach(s -> {
+                            if (s.equals(item))
+                                s.setAvailability(s.getAvailability() - amountToSell.getValue().longValue());
+                        });
+                        item.setPharmacyId(currentUser.getPharmacyID());
+                        dataProvider.refreshAll();
+                        stockService.sell(item, amountToSell.getValue().longValue());
+                        dialog.close();
+                        configureGrid();
+                        updateGrid();
+                        Notification.show(String.format("You successfully sold '%s'x%s", item.getTrademarkName(), amountToSell.getValue().longValue()),
+                                5000, Notification.Position.TOP_END).addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+                    } else {
+                        Notification.show("You can't sell that much", 5000, Notification.Position.TOP_END).addThemeVariants(NotificationVariant.LUMO_ERROR);
+                    }
+                });
+            } else {
+                sell.setText("Buy");
+                sell.addClickListener(ev -> {
                     ListDataProvider<StockDTO> dataProvider = (ListDataProvider<StockDTO>) grid
                             .getDataProvider();
                     dataProvider.getItems().forEach(s -> {
-                        if (s.equals(item)) s.setAvailability(s.getAvailability() - amountToSell.getValue().longValue());
+                        if (s.equals(item)) s.setAvailability(s.getAvailability() + amountToSell.getValue().longValue());
                     });
                     item.setPharmacyId(currentUser.getPharmacyID());
                     dataProvider.refreshAll();
-                    stockService.sell(item, amountToSell.getValue().longValue());
+                    stockService.buy(item, amountToSell.getValue().longValue());
                     dialog.close();
-                    Notification.show(String.format("You successfully sold '%s'x%s", item.getTrademarkName(), amountToSell.getValue().longValue()),
+                    configureGrid();
+                    updateGrid();
+                    Notification.show(String.format("You successfully bought '%s'x%s", item.getTrademarkName(), amountToSell.getValue().longValue()),
                             5000, Notification.Position.TOP_END).addThemeVariants(NotificationVariant.LUMO_SUCCESS);
-                } else {
-                    Notification.show("You can't sell that much", 5000, Notification.Position.TOP_END).addThemeVariants(NotificationVariant.LUMO_ERROR);
-                }
-            });
+                });
+            }
             sell.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
 
-            formLayout.add(new H2("Sell trademark"),
+            formLayout.add(new H2("Edit trademark"),
                     amountToSell, sell);
             dialog.add(formLayout);
             dialog.open();
+            configureGrid();
             updateGrid();
         });
     }

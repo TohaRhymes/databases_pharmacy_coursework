@@ -1,13 +1,19 @@
 package se.ifmo.pepe.cwdb.backend.auth;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+@Data
+public class UserPrincipal implements UserDetails {
+    User user;
 
-public record UserPrincipal(User user) implements UserDetails {
+    public UserPrincipal(User user) {
+        this.user = user;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

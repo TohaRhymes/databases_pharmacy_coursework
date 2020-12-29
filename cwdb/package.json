@@ -40,7 +40,8 @@
       "@vaadin/vaadin-lumo-styles": "1.6.0",
       "@vaadin/vaadin-material-styles": "1.3.2",
       "@polymer/paper-ripple": "3.0.2",
-      "@vaadin-component-factory/vcf-autocomplete": "1.2.7"
+      "@vaadin-component-factory/vcf-autocomplete": "1.2.7",
+      "@vaadin/vaadin-charts": "6.3.1"
     },
     "devDependencies": {
       "webpack-babel-multi-target-plugin": "2.3.3",
@@ -53,7 +54,7 @@
       "webpack-merge": "4.2.2",
       "webpack-dev-server": "3.11.0"
     },
-    "hash": "6b0722d1a994fa7f27634c12d03b28cb0b3dee83239e9ebfe0e21378daea88ca"
+    "hash": "029abee294044e6e42ba0db4ce4be2a73d7bfc56842ba25d394b5a8048b320bc"
   },
   "dependencies": {
     "lit-element": "^2.2.1",
@@ -93,7 +94,8 @@
     "@vaadin/vaadin-lumo-styles": "1.6.0",
     "@vaadin/vaadin-material-styles": "1.3.2",
     "@polymer/paper-ripple": "3.0.2",
-    "@vaadin-component-factory/vcf-autocomplete": "1.2.7"
+    "@vaadin-component-factory/vcf-autocomplete": "1.2.7",
+    "@vaadin/vaadin-charts": "6.3.1"
   },
   "devDependencies": {
     "webpack-babel-multi-target-plugin": "2.3.3",
