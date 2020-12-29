@@ -28,6 +28,7 @@ INSERT INTO drugs(active_substance, homeopathy, drugs_group)
 VALUES ('Phenol', false, 'Group A (prohibited substances)');
 
 
+
 INSERT INTO drugs_to_poisons
 VALUES (1, 1);
 INSERT INTO drugs_to_poisons
@@ -52,6 +53,7 @@ SET (market_cap, net_profit_margin_pct_annual) = (10, 100)
 where name = 'RosVitro';
 UPDATE companies
 SET (name, specialization, market_cap, net_profit_margin_pct_annual)= ('RosVitro', 'viruses', 50, 34);
+
 INSERT INTO companies(name, specialization, market_cap, net_profit_margin_pct_annual)
 VALUES ('Grindex', 'synthetic', 1000, 2130);
 INSERT INTO companies(name, specialization)
@@ -96,4 +98,4 @@ VALUES (1, 2, 'Phase III', true);
 INSERT INTO development(company_id, pathogen_id, testing_stage, failed)
 VALUES (1, 2, 'Preclinical phase', false);
 INSERT INTO development(company_id, pathogen_id, testing_stage, failed)
-VALUES (2, 1, 'Phase IV', false);
+VALUES (2, 1, 'Phase IV', false)

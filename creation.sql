@@ -1,45 +1,24 @@
 drop table if exists development;
-
 drop table if exists stock;
-
 drop table if exists trademarks;
-
 drop table if exists patents;
-
 drop table if exists pharmacies;
-
 drop table if exists drugs_to_diseases;
-
 drop table if exists drugs_to_poisons;
-
 drop table if exists poisons;
-
 drop table if exists drugs;
-
 drop table if exists ethnoscience_to_diseases;
-
 drop table if exists diseases;
-
 drop table if exists pathogens;
-
 drop table if exists ethnoscience;
-
 drop table if exists company_info;
-
 drop table if exists companies;
 
-
-
 drop type if exists pathogen_type cascade;
-
 drop type if exists drugs_groups cascade;
-
 drop type if exists poison_origin cascade;
-
 drop type if exists development_stage cascade;
-
 drop type if exists stock_availability cascade;
-
 drop type if exists patent_distribution cascade;
 
 
